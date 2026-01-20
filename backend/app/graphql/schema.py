@@ -1,7 +1,10 @@
 import strawberry
+from strawberry.exceptions import GraphQLError
 from strawberry.types import Info
 
 from app.domain.models import State
+from app.domain.services import InvalidConsumptionError
+from app.domain.services import StateNotFoundError
 from app.domain.services import build_state_quote
 from app.graphql.types import SolutionQuoteType
 from app.graphql.types import StateQuoteType
@@ -27,7 +30,13 @@ class Query:
     @strawberry.field
     def quote(self, info: Info, state_code: str, consumption_kwh: float) -> StateQuoteType:
         session = info.context["db"]
-        quote = build_state_quote(session, state_code=state_code, consumption_kwh=consumption_kwh)
+        try:
+            quote = build_state_quote(session, state_code=state_code, consumption_kwh=consumption_kwh)
+        except StateNotFoundError as exc:
+            raise GraphQLError(str(exc)) from exc
+        except InvalidConsumptionError as exc:
+            raise GraphQLError(str(exc)) from exc
+
         solutions = []
         for solution in quote.solutions:
             suppliers = [
