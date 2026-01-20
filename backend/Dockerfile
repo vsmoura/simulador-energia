@@ -10,10 +10,6 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY app /app/app
 COPY alembic.ini /app/alembic.ini
-COPY scripts /app/scripts
-
-RUN chmod +x /app/scripts/start.sh
-
 EXPOSE 8000
 
-CMD ["/app/scripts/start.sh"]
+CMD ["sh", "-c", "alembic -c /app/alembic.ini upgrade head && python -m app.db.cli seed && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
