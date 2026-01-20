@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     database_url: str = Field(default="sqlite:///./clark.db")
     app_name: str = Field(default="Clarke Energia API")
     api_version: str = Field(default="v1")
+    log_level: str = Field(default="INFO")
 
 
 @lru_cache

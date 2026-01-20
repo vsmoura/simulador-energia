@@ -3,11 +3,13 @@ from fastapi import FastAPI
 from strawberry.fastapi import GraphQLRouter
 
 from app.core.config import get_settings
+from app.core.logging import configure_logging
 from app.db.seed import seed_database
 from app.db.session import get_db
 from app.graphql.context import GraphQLContext
 from app.graphql.schema import schema
 
+configure_logging()
 settings = get_settings()
 
 app = FastAPI(title=settings.app_name, version=settings.api_version)
