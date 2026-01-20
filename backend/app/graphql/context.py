@@ -6,6 +6,6 @@ from sqlalchemy.orm import Session
 from strawberry.fastapi import BaseContext
 
 
-@dataclass(frozen=True)
+@dataclass
 class GraphQLContext(BaseContext):
     db: Session
