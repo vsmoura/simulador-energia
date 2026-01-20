@@ -45,6 +45,11 @@ uvicorn app.main:app --reload --port 8000
 docker compose up --build
 ```
 
+## Health checks
+
+- `GET /health`
+- `GET /health/db`
+
 ## GraphQL
 
 - Endpoint: `http://localhost:8000/graphql`

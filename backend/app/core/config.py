@@ -1,4 +1,5 @@
 from functools import lru_cache
+from typing import List
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -14,6 +15,7 @@ class Settings(BaseSettings):
     app_name: str = Field(default="Clarke Energia API")
     api_version: str = Field(default="v1")
     log_level: str = Field(default="INFO")
+    cors_origins: List[str] = Field(default_factory=list)
 
 
 @lru_cache

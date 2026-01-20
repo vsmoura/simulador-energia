@@ -1,5 +1,7 @@
 from fastapi import Depends
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
 from strawberry.fastapi import GraphQLRouter
 
 from app.core.config import get_settings
@@ -13,6 +15,15 @@ configure_logging()
 settings = get_settings()
 
 app = FastAPI(title=settings.app_name, version=settings.api_version)
+
+if settings.cors_origins:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.cors_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
 def get_context(db=Depends(get_db)) -> GraphQLContext:
@@ -31,4 +42,10 @@ def startup_seed() -> None:
 
 @app.get("/health")
 def health_check() -> dict[str, str]:
+    return {"status": "ok"}
+
+
+@app.get("/health/db")
+def db_health_check(db=Depends(get_db)) -> dict[str, str]:
+    db.execute(text("SELECT 1"))
     return {"status": "ok"}
