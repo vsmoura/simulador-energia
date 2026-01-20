@@ -1,8 +1,5 @@
-from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from sqlalchemy.orm import sessionmaker
 
-from app.db.base import Base
 from app.db.seed import seed_database
 from app.domain.models import SolutionType
 from app.domain.services import InvalidConsumptionError
@@ -10,14 +7,8 @@ from app.domain.services import StateNotFoundError
 from app.domain.services import build_state_quote
 
 
-def _session() -> Session:
-    engine = create_engine("sqlite:///:memory:", connect_args={"check_same_thread": False})
-    Base.metadata.create_all(engine)
-    return sessionmaker(bind=engine)()
-
-
-def test_build_state_quote_returns_ranked_solutions() -> None:
-    session = _session()
+def test_build_state_quote_returns_ranked_solutions(build_session) -> None:
+    session: Session = build_session
     seed_database(session)
 
     quote = build_state_quote(session, state_code="SP", consumption_kwh=30000)
@@ -34,8 +25,8 @@ def test_build_state_quote_returns_ranked_solutions() -> None:
         assert solution.suppliers[0].economy >= solution.suppliers[-1].economy
 
 
-def test_build_state_quote_invalid_consumption() -> None:
-    session = _session()
+def test_build_state_quote_invalid_consumption(build_session) -> None:
+    session: Session = build_session
     seed_database(session)
 
     try:
@@ -46,8 +37,8 @@ def test_build_state_quote_invalid_consumption() -> None:
         assert False, "Expected InvalidConsumptionError"
 
 
-def test_build_state_quote_unknown_state() -> None:
-    session = _session()
+def test_build_state_quote_unknown_state(build_session) -> None:
+    session: Session = build_session
     seed_database(session)
 
     try:
