@@ -56,3 +56,21 @@ def test_quote_query_invalid_consumption_returns_error(build_context) -> None:
 
     assert result.errors
     assert result.errors[0].extensions["code"] == "INVALID_CONSUMPTION"
+
+
+def test_quote_query_unknown_state_returns_error(build_context) -> None:
+    query = """
+        query GetQuote($stateCode: String!, $consumptionKwh: Float!) {
+            quote(stateCode: $stateCode, consumptionKwh: $consumptionKwh) {
+                stateCode
+            }
+        }
+    """
+    result = schema.execute_sync(
+        query,
+        variable_values={"stateCode": "XX", "consumptionKwh": 1000},
+        context_value=build_context,
+    )
+
+    assert result.errors
+    assert result.errors[0].extensions["code"] == "STATE_NOT_FOUND"
