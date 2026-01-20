@@ -24,7 +24,13 @@ cp .env.example .env
 Para criar as tabelas via Alembic:
 
 ```bash
-alembic upgrade head
+python -m app.db.cli migrate
+```
+
+Para popular dados de exemplo:
+
+```bash
+python -m app.db.cli seed
 ```
 
 ## Rodando localmente
