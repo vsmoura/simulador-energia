@@ -32,6 +32,6 @@ npm run test
 ## Rodar com Docker
 
 ```bash
-docker build -t clark-energia-frontend .
+docker build --build-arg VITE_GRAPHQL_URL=http://localhost:8000/graphql -t clark-energia-frontend .
 docker run -p 5173:80 clark-energia-frontend
 ```

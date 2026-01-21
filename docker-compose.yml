@@ -14,8 +14,8 @@ services:
   frontend:
     build:
       context: ./frontend
-    environment:
-      VITE_GRAPHQL_URL: http://backend:8000/graphql
+      args:
+        VITE_GRAPHQL_URL: http://localhost:8000/graphql
     ports:
       - "5173:80"
     depends_on:
