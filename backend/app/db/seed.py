@@ -46,63 +46,63 @@ def seed_database(session: Session) -> None:
 
     supplier_solatio = Supplier(
         name="Solatio Energia",
-        logo_url="https://www.solatioenergia.com.br/wp-content/uploads/2021/09/logo-solatio.svg",
+        logo_url="https://placehold.co/120x60?text=SOLATIO",
         origin_state_id=states_by_code["RN"].id,
         total_customers=18000,
         average_rating=4.5,
     )
     supplier_serena = Supplier(
         name="Serena Energia",
-        logo_url="https://www.serenaenergia.com.br/wp-content/uploads/2023/06/logo-serena.svg",
+        logo_url="https://placehold.co/120x60?text=SERENA",
         origin_state_id=states_by_code["SP"].id,
         total_customers=9000,
         average_rating=4.4,
     )
     supplier_electy = Supplier(
         name="Electy Energia",
-        logo_url="https://www.electy.com.br/assets/logo.svg",
+        logo_url="https://placehold.co/120x60?text=ELECTY",
         origin_state_id=states_by_code["SP"].id,
         total_customers=32000,
         average_rating=4.6,
     )
     supplier_engie = Supplier(
         name="Engie Brasil Energia",
-        logo_url="https://www.engie.com.br/wp-content/uploads/2021/03/logo-engie.svg",
+        logo_url="https://placehold.co/120x60?text=ENGIE",
         origin_state_id=states_by_code["SC"].id,
         total_customers=1500,
         average_rating=4.6,
     )
     supplier_eneva = Supplier(
         name="Eneva",
-        logo_url="https://www.eneva.com.br/wp-content/uploads/2022/04/logo-eneva.svg",
+        logo_url="https://placehold.co/120x60?text=ENEVA",
         origin_state_id=states_by_code["RJ"].id,
         total_customers=1100,
         average_rating=4.3,
     )
     supplier_matrix = Supplier(
         name="Matrix Energia",
-        logo_url="https://www.matrixenergia.com.br/wp-content/uploads/2022/10/logo-matrix.svg",
+        logo_url="https://placehold.co/120x60?text=MATRIX",
         origin_state_id=states_by_code["SP"].id,
         total_customers=3800,
         average_rating=4.5,
     )
     supplier_cpfl = Supplier(
         name="CPFL Energia",
-        logo_url="https://www.cpfl.com.br/assets/images/logo-cpfl.svg",
+        logo_url="https://placehold.co/120x60?text=CPFL",
         origin_state_id=states_by_code["SP"].id,
         total_customers=20000,
         average_rating=4.2,
     )
     supplier_aes = Supplier(
         name="AES Brasil",
-        logo_url="https://www.aesbrasil.com.br/wp-content/uploads/2022/09/logo-aes.svg",
+        logo_url="https://placehold.co/120x60?text=AES",
         origin_state_id=states_by_code["SP"].id,
         total_customers=4200,
         average_rating=4.5,
     )
     supplier_noenergia = Supplier(
         name="Neoenergia",
-        logo_url="https://www.neoenergia.com/pt-br/PublishingImages/logo-neoenergia.svg",
+        logo_url="https://placehold.co/120x60?text=NEO",
         origin_state_id=states_by_code["BA"].id,
         total_customers=14000,
         average_rating=4.1,
