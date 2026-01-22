@@ -6,6 +6,7 @@ from sqlalchemy.orm import selectinload
 from app.application.repositories import QuoteRepository
 from app.domain.quotes import SolutionType
 from app.infrastructure.db.models import State
+from app.infrastructure.db.models import Supplier
 from app.infrastructure.db.models import SupplierAvailability
 
 
@@ -19,7 +20,7 @@ class SqlAlchemyQuoteRepository(QuoteRepository):
             .options(
                 selectinload(State.suppliers)
                 .selectinload(SupplierAvailability.supplier)
-                .selectinload("solutions")
+                .selectinload(Supplier.solutions)
             )
             .filter(State.code == state_code)
             .one_or_none()
