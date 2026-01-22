@@ -57,9 +57,11 @@ export const QuoteResult = ({ data }: QuoteResultProps) => {
   return (
     <section className="quote-result">
       <header>
-        <h2>Resultado para {data.stateCode}</h2>
+        <h2>Análise Energética para {data.stateName}</h2>
         <p>
-          Consumo: {data.consumptionKwh} kWh | Base: {formatCurrency(data.baseCost)}
+          Atualmente, com o consumo de <strong>{data.consumptionKwh} kWh</strong> na tarifa
+          convencional da distribuidora estadual, seu custo mensal é de{" "}
+          <strong>{formatCurrency(data.baseCost)}</strong>.
         </p>
       </header>
 

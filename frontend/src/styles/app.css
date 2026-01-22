@@ -219,6 +219,19 @@
   display: grid;
   gap: 4px;
   color: #0b3d2e;
+  text-align: center;
+}
+
+.quote-result header h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.quote-result header p {
+  margin: 0;
+  color: #4b5563;
+  max-width: 680px;
+  justify-self: center;
 }
 
 .solutions {
