@@ -2,7 +2,9 @@ import strawberry
 
 from app.domain.quotes import SolutionType
 
+
 SolutionTypeEnum = strawberry.enum(SolutionType, name="SolutionType")
+
 
 @strawberry.type
 class SupplierQuoteType:
