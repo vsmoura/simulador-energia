@@ -4,7 +4,6 @@ from app.domain.quotes import InvalidConsumptionError
 from app.domain.quotes import StateNotFoundError
 from app.graphql.errors import as_graphql_error
 
-
 def test_as_graphql_error_state_not_found() -> None:
     error = as_graphql_error(StateNotFoundError("State XX not found."))
 
