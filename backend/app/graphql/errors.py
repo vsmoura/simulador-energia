@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from strawberry.exceptions import GraphQLError
 
-from app.domain.services import InvalidConsumptionError
-from app.domain.services import StateNotFoundError
+from app.domain.quotes import InvalidConsumptionError
+from app.domain.quotes import StateNotFoundError
 
 
 def as_graphql_error(error: Exception) -> GraphQLError:

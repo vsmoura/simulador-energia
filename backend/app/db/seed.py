@@ -1,5 +1,10 @@
 from sqlalchemy.orm import Session
 
+from app.domain.quotes import SolutionType
+from app.infrastructure.db.models import State
+from app.infrastructure.db.models import Supplier
+from app.infrastructure.db.models import SupplierAvailability
+from app.infrastructure.db.models import SupplierSolution
 from app.domain.models import SolutionType
 from app.domain.models import State
 from app.domain.models import Supplier
