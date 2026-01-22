@@ -78,10 +78,9 @@ export const QuotePage = () => {
         </div>
 
         <section className="panel hero-panel">
-          <h2>Peça sua análise gratuita</h2>
+          <h2>Simulador de Economia</h2>
           <p>
-            Informe o estado e o consumo mensal para comparar soluções de GD e Mercado Livre em
-            segundos.
+            Calcule quanto você pode economizar na conta de luz.
           </p>
           {statesError && <p className="error">Erro ao carregar estados.</p>}
           <QuoteForm

@@ -12,10 +12,13 @@ const formatCurrency = (value: number) =>
 
 const formatPercent = (value: number) => `${(value * 100).toFixed(2)}%`;
 
+const formatSolutionLabel = (value: string) =>
+  value === "MERCADO_LIVRE" ? "Mercado Livre" : "Geração Distribuída";
+
 const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
   <div className="solution-card">
     <div className="solution-header">
-      <h3>{solution.solutionType}</h3>
+      <h3>{formatSolutionLabel(solution.solutionType)}</h3>
       <div>
         <strong>{formatCurrency(solution.bestEconomy)}</strong>
         <span> ({formatPercent(solution.bestEconomyPercent)})</span>

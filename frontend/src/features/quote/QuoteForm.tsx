@@ -66,7 +66,7 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
       </label>
 
       <button type="submit" disabled={loading}>
-        {loading ? "Calculando..." : "Calcular economia"}
+        {loading ? "Calculando..." : "Calcular"}
       </button>
     </form>
   );
