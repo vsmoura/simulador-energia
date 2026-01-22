@@ -39,20 +39,58 @@ export const QuotePage = () => {
 
   return (
     <div className="page">
-      <header className="hero">
-        <h1>Clarke Energia</h1>
-        <p>Simule sua economia com GD e Mercado Livre.</p>
+      <header className="topbar">
+        <div className="brand">
+          <span className="brand-mark">clarke</span>
+          <span className="brand-accent">energia</span>
+        </div>
+        <nav className="topbar-actions">
+          <button className="ghost" type="button">
+            Soluções
+          </button>
+          <button className="ghost" type="button">
+            Conteúdo
+          </button>
+          <button className="pill" type="button">
+            Área do cliente
+          </button>
+        </nav>
       </header>
 
-      <section className="panel">
-        <h2>Simulador de Economia</h2>
-        {statesError && <p className="error">Erro ao carregar estados.</p>}
-        <QuoteForm
-          states={statesData?.states ?? []}
-          onSubmit={handleSubmit}
-          loading={statesLoading || quoteLoading}
-        />
-        {quoteError && <p className="error">Erro ao calcular economia.</p>}
+      <section className="hero">
+        <div className="hero-content">
+          <span className="eyebrow">Mercado Livre de Energia</span>
+          <h1>
+            Sua empresa <span className="accent">eficiente</span> no Mercado Livre de Energia
+          </h1>
+          <p>
+            A Clarke Energia conecta sua empresa aos melhores fornecedores e ajuda a transformar
+            custo em economia com tecnologia e transparência.
+          </p>
+          <div className="hero-cta">
+            <button className="ghost" type="button">
+              Saiba mais
+            </button>
+            <button className="primary" type="button">
+              Simular economia
+            </button>
+          </div>
+        </div>
+
+        <section className="panel hero-panel">
+          <h2>Peça sua análise gratuita</h2>
+          <p>
+            Informe o estado e o consumo mensal para comparar soluções de GD e Mercado Livre em
+            segundos.
+          </p>
+          {statesError && <p className="error">Erro ao carregar estados.</p>}
+          <QuoteForm
+            states={statesData?.states ?? []}
+            onSubmit={handleSubmit}
+            loading={statesLoading || quoteLoading}
+          />
+          {quoteError && <p className="error">Erro ao calcular economia.</p>}
+        </section>
       </section>
 
       {quoteData && <QuoteResult data={quoteData} />}

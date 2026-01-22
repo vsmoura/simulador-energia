@@ -44,9 +44,7 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
     <form className="quote-form" onSubmit={handleSubmit(onSubmit)}>
       <label>
         Estado (UF)
-        <select {...register("stateCode")}
-          disabled={loading}
-        >
+        <select {...register("stateCode")} disabled={loading}>
           <option value="">Selecione</option>
           {stateOptions}
         </select>
