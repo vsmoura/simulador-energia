@@ -14,6 +14,19 @@ interface StatesResponse {
   states: StateOption[];
 }
 
+const CalculatorIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className="icon icon-accent">
+    <rect x="5" y="3" width="14" height="18" rx="3" stroke="currentColor" strokeWidth="1.6" fill="none" />
+    <rect x="8" y="6" width="8" height="3" rx="1" fill="currentColor" />
+    <path
+      d="M8.5 12.5h1.5M12 12.5h1.5M15.5 12.5h0M8.5 15.5h1.5M12 15.5h1.5M15.5 15.5h0"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 export const QuotePage = () => {
   const { data: statesData, loading: statesLoading, error: statesError } = useQuery<StatesResponse>(
     STATES_QUERY,
@@ -45,15 +58,12 @@ export const QuotePage = () => {
           <span className="brand-accent">energia</span>
         </div>
         <nav className="topbar-actions">
-          <button className="ghost" type="button">
+          <a className="ghost" href="https://clarke.com.br/nossas-solucoes/" target="_blank" rel="noreferrer">
             Soluções
-          </button>
-          <button className="ghost" type="button">
-            Conteúdo
-          </button>
-          <button className="pill" type="button">
+          </a>
+          <a className="pill" href="https://cliente.clarke.com.br" target="_blank" rel="noreferrer">
             Área do cliente
-          </button>
+          </a>
         </nav>
       </header>
 
@@ -68,17 +78,25 @@ export const QuotePage = () => {
             custo em economia com tecnologia e transparência.
           </p>
           <div className="hero-cta">
-            <button className="ghost" type="button">
+            <a className="ghost" href="https://clarke.com.br/" target="_blank" rel="noreferrer">
               Saiba mais
-            </button>
-            <button className="primary" type="button">
+            </a>
+            <a
+              className="primary"
+              href="https://clarke.com.br/simulador-do-mercado-livre-de-energia/"
+              target="_blank"
+              rel="noreferrer"
+            >
               Simular economia
-            </button>
+            </a>
           </div>
         </div>
 
         <section className="panel hero-panel">
-          <h2>Simulador de Economia</h2>
+          <h2 className="panel-title">
+            <CalculatorIcon />
+            Simulador de Economia
+          </h2>
           <p>
             Calcule quanto você pode economizar na conta de luz.
           </p>

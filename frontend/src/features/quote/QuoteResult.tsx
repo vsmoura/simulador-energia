@@ -47,19 +47,26 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
   </div>
 );
 
-export const QuoteResult = ({ data }: QuoteResultProps) => (
-  <section className="quote-result">
-    <header>
-      <h2>Resultado para {data.stateCode}</h2>
-      <p>
-        Consumo: {data.consumptionKwh} kWh | Base: {formatCurrency(data.baseCost)}
-      </p>
-    </header>
+const solutionByType = (solutions: SolutionQuote[], type: string) =>
+  solutions.find((solution) => solution.solutionType === type);
 
-    <div className="solutions">
-      {data.solutions.map((solution) => (
-        <SolutionCard key={solution.solutionType} solution={solution} />
-      ))}
-    </div>
-  </section>
-);
+export const QuoteResult = ({ data }: QuoteResultProps) => {
+  const mercadoLivre = solutionByType(data.solutions, "MERCADO_LIVRE");
+  const geracaoDistribuida = solutionByType(data.solutions, "GD");
+
+  return (
+    <section className="quote-result">
+      <header>
+        <h2>Resultado para {data.stateCode}</h2>
+        <p>
+          Consumo: {data.consumptionKwh} kWh | Base: {formatCurrency(data.baseCost)}
+        </p>
+      </header>
+
+      <div className="solutions">
+        {mercadoLivre && <SolutionCard solution={mercadoLivre} />}
+        {geracaoDistribuida && <SolutionCard solution={geracaoDistribuida} />}
+      </div>
+    </section>
+  );
+};
