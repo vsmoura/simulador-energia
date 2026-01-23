@@ -108,7 +108,7 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
     <ol className="supplier-list">
       {solution.suppliers.map((supplier, index) => (
         <li key={`${supplier.supplierId}-${supplier.solutionType}`} className="supplier-item">
-          <details>
+          <details open={index === 0}>
             <summary>
               <span className="rank">{formatRank(index)}</span>
               <img src={supplier.supplierLogoUrl} alt={supplier.supplierName} />
@@ -118,7 +118,7 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
                 {supplier.averageRating.toFixed(1)}
               </span>
               <span className="supplier-economy">
-                Desconto {formatPercent(supplier.economyPercent)}
+                {formatPercent(supplier.economyPercent)}
               </span>
             </summary>
             <div className="supplier-details">
