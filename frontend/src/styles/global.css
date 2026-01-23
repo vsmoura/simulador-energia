@@ -1,0 +1,36 @@
+:root {
+  font-family: "Inter", system-ui, sans-serif;
+  color: #0f172a;
+  background-color: #f6f7f3;
+  line-height: 1.5;
+  font-weight: 400;
+  --brand-green: #17c964;
+  --brand-deep: #0b3d2e;
+  --brand-dark: #0a2e23;
+  --brand-mint: #e7f8ee;
+  --surface: #ffffff;
+  --surface-soft: #f5f8f4;
+  --text-primary: #0f172a;
+  --text-muted: #4b5563;
+  --shadow-strong: 0 20px 45px rgba(10, 46, 35, 0.25);
+  --shadow-soft: 0 12px 30px rgba(10, 46, 35, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0b3d2e 0%, #0f5a3a 45%, #f4f7f2 46%);
+  color: var(--text-primary);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
