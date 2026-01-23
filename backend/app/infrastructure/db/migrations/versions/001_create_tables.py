@@ -33,7 +33,7 @@ def upgrade() -> None:
         "suppliers",
         sa.Column("id", sa.Integer(), primary_key=True),
         sa.Column("name", sa.String(length=120), nullable=False),
-        sa.Column("logo_url", sa.String(length=255), nullable=False),
+        sa.Column("logo_url", sa.Text(), nullable=False),
         sa.Column("origin_state_id", sa.Integer(), sa.ForeignKey("states.id"), nullable=False),
         sa.Column("total_customers", sa.Integer(), nullable=False),
         sa.Column("average_rating", sa.Float(), nullable=False),

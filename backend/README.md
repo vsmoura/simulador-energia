@@ -30,7 +30,7 @@ cp .env.example .env
 Para criar as tabelas via Alembic:
 
 ```bash
-python -m app.db.cli migrate
+python -m app.infrastructure.db.cli migrate
 ```
 
 Atalho com Makefile:
@@ -42,7 +42,7 @@ make migrate
 Para popular dados de exemplo:
 
 ```bash
-python -m app.db.cli seed
+python -m app.infrastructure.db.cli seed
 ```
 
 Atalho com Makefile:

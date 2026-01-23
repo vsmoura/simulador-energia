@@ -2,9 +2,9 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.db.base import Base
-from app.db.seed import seed_database
-from app.graphql.context import GraphQLContext
+from app.infrastructure.db.base import Base
+from app.infrastructure.db.seed import seed_database
+from app.adapters.graphql.context import GraphQLContext
 
 
 def _session():

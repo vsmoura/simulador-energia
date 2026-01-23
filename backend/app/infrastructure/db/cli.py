@@ -5,8 +5,8 @@ import argparse
 from alembic import command
 from alembic.config import Config
 
-from app.db.seed import seed_database
-from app.db.session import SessionLocal
+from app.infrastructure.db.seed import seed_database
+from app.infrastructure.db.session import SessionLocal
 
 
 def _alembic_config() -> Config:

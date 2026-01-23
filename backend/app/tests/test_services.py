@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.application.quote_service import QuoteService
-from app.db.seed import seed_database
+from app.infrastructure.db.seed import seed_database
 from app.domain.quotes import InvalidConsumptionError
 from app.domain.quotes import SolutionType
 from app.domain.quotes import StateNotFoundError

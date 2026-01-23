@@ -4,12 +4,12 @@ from strawberry.types import Info
 from app.application.quote_service import QuoteService
 from app.domain.quotes import InvalidConsumptionError
 from app.domain.quotes import StateNotFoundError
-from app.graphql.context import GraphQLContext
-from app.graphql.errors import as_graphql_error
-from app.graphql.types import SolutionQuoteType
-from app.graphql.types import StateQuoteType
-from app.graphql.types import StateType
-from app.graphql.types import SupplierQuoteType
+from app.adapters.graphql.context import GraphQLContext
+from app.adapters.graphql.errors import as_graphql_error
+from app.adapters.graphql.types import SolutionQuoteType
+from app.adapters.graphql.types import StateQuoteType
+from app.adapters.graphql.types import StateType
+from app.adapters.graphql.types import SupplierQuoteType
 from app.infrastructure.db.models import State
 from app.infrastructure.repositories.sqlalchemy_quote_repository import SqlAlchemyQuoteRepository
 

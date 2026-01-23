@@ -13,4 +13,4 @@ COPY alembic.ini /app/alembic.ini
 ENV PYTHONPATH=/app
 EXPOSE 8000
 
-CMD ["sh", "-c", "alembic -c /app/alembic.ini upgrade head && python -m app.db.cli seed && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "alembic -c /app/alembic.ini upgrade head && python -m app.infrastructure.db.cli seed && uvicorn app.main:app --host 0.0.0.0 --port 8000"]

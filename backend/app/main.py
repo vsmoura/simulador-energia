@@ -6,10 +6,10 @@ from strawberry.fastapi import GraphQLRouter
 
 from app.core.config import get_settings
 from app.core.logging import configure_logging
-from app.db.seed import seed_database
-from app.db.session import get_db
-from app.graphql.context import GraphQLContext
-from app.graphql.schema import schema
+from app.infrastructure.db.seed import seed_database
+from app.infrastructure.db.session import get_db
+from app.adapters.graphql.context import GraphQLContext
+from app.adapters.graphql.schema import schema
 
 configure_logging()
 settings = get_settings()

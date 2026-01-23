@@ -2,6 +2,6 @@
 set -euo pipefail
 
 alembic -c /app/alembic.ini upgrade head
-python -m app.db.cli seed
+python -m app.infrastructure.db.cli seed
 
 exec uvicorn app.main:app --host 0.0.0.0 --port 8000

@@ -1,1 +1,1 @@
-"""Database infrastructure components."""
+"""Database configuration and session management."""

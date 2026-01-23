@@ -1,4 +1,4 @@
-from app.graphql.schema import schema
+from app.adapters.graphql.schema import schema
 
 
 def test_states_query_returns_data(build_context) -> None:
