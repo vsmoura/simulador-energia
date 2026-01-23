@@ -1,6 +1,6 @@
 import strawberry
 
-from app.domain.models import SolutionType
+from app.domain.quotes import SolutionType
 
 
 SolutionTypeEnum = strawberry.enum(SolutionType, name="SolutionType")

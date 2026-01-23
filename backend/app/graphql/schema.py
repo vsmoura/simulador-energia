@@ -1,14 +1,17 @@
 import strawberry
 from strawberry.types import Info
 
-from app.domain.models import State
-from app.domain.services import build_state_quote
+from app.application.quote_service import QuoteService
+from app.domain.quotes import InvalidConsumptionError
+from app.domain.quotes import StateNotFoundError
 from app.graphql.context import GraphQLContext
 from app.graphql.errors import as_graphql_error
 from app.graphql.types import SolutionQuoteType
 from app.graphql.types import StateQuoteType
 from app.graphql.types import StateType
 from app.graphql.types import SupplierQuoteType
+from app.infrastructure.db.models import State
+from app.infrastructure.repositories.sqlalchemy_quote_repository import SqlAlchemyQuoteRepository
 
 
 @strawberry.type
@@ -34,8 +37,12 @@ class Query:
         consumption_kwh: float,
     ) -> StateQuoteType:
         session = info.context.db
+        repo = SqlAlchemyQuoteRepository(session)
+        service = QuoteService(repo)
         try:
-            quote = build_state_quote(session, state_code=state_code, consumption_kwh=consumption_kwh)
+            quote = service.build_state_quote(state_code=state_code, consumption_kwh=consumption_kwh)
+        except (StateNotFoundError, InvalidConsumptionError) as exc:
+            raise as_graphql_error(exc) from exc
         except Exception as exc:
             raise as_graphql_error(exc) from exc
 

@@ -20,6 +20,27 @@ interface QuoteFormProps {
   loading?: boolean;
 }
 
+const LocationIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">
+    <path
+      d="M12 3.5c-3.3 0-6 2.7-6 6 0 4.7 6 10 6 10s6-5.3 6-10c0-3.3-2.7-6-6-6Z"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+    />
+    <circle cx="12" cy="9.5" r="2.5" fill="currentColor" />
+  </svg>
+);
+
+const EnergyIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">
+    <path
+      d="M13 2L6 13h5l-1 9 8-12h-5l1-8Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
   const {
     register,
@@ -27,7 +48,7 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { stateCode: "", consumptionKwh: 30000 },
+    defaultValues: { stateCode: "" },
   });
 
   const stateOptions = useMemo(
@@ -43,10 +64,11 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
   return (
     <form className="quote-form" onSubmit={handleSubmit(onSubmit)}>
       <label>
-        Estado (UF)
-        <select {...register("stateCode")}
-          disabled={loading}
-        >
+        <span className="label">
+          <LocationIcon />
+          Estado (UF)
+        </span>
+        <select {...register("stateCode")} disabled={loading}>
           <option value="">Selecione</option>
           {stateOptions}
         </select>
@@ -54,11 +76,15 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
       </label>
 
       <label>
-        Consumo mensal (kWh)
+        <span className="label">
+          <EnergyIcon />
+          Consumo mensal (kWh)
+        </span>
         <input
           type="number"
           step="1"
           min="1"
+          placeholder="15000"
           {...register("consumptionKwh", { valueAsNumber: true })}
           disabled={loading}
         />
@@ -68,7 +94,7 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
       </label>
 
       <button type="submit" disabled={loading}>
-        {loading ? "Calculando..." : "Calcular economia"}
+        {loading ? "Calculando..." : "Calcular"}
       </button>
     </form>
   );

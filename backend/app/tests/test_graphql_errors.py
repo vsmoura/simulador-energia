@@ -1,7 +1,7 @@
 from strawberry.exceptions import GraphQLError
 
-from app.domain.services import InvalidConsumptionError
-from app.domain.services import StateNotFoundError
+from app.domain.quotes import InvalidConsumptionError
+from app.domain.quotes import StateNotFoundError
 from app.graphql.errors import as_graphql_error
 
 
