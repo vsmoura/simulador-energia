@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    environment:
+      CLARKE_DATABASE_URL: postgresql+psycopg://clarke:clarke@db:5432/clarke
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_GRAPHQL_URL: http://localhost:8000/graphql
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: clarke
+      POSTGRES_USER: clarke
+      POSTGRES_PASSWORD: clarke
+    ports:
+      - "5432:5432"
+    volumes:
+      - clarke_db:/var/lib/postgresql/data
+
+volumes:
+  clarke_db:
