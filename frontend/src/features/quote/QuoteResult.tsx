@@ -87,6 +87,10 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
               <span className="rank">{formatRank(index)}</span>
               <img src={supplier.supplierLogoUrl} alt={supplier.supplierName} />
               <span className="supplier-name">{supplier.supplierName}</span>
+              <span className="supplier-rating">
+                <StarIcon />
+                {supplier.averageRating.toFixed(1)}
+              </span>
               <span className="supplier-economy">
                 {formatPercent(supplier.economyPercent)}
               </span>
@@ -102,20 +106,12 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
                   Economia: {formatCurrency(supplier.economy)}
                 </span>
                 <span>
-                  <TrendIcon />
-                  Economia %: {formatPercent(supplier.economyPercent)}
-                </span>
-                <span>
                   <CurrencyIcon />
-                  Custo final estimado: {formatCurrency(supplier.costTotal)}
+                  Custo final: {formatCurrency(supplier.costTotal)}
                 </span>
                 <span>
                   <UsersIcon />
                   Clientes: {supplier.totalCustomers}
-                </span>
-                <span>
-                  <StarIcon />
-                  Avaliação: {supplier.averageRating.toFixed(1)}
                 </span>
               </div>
             </div>

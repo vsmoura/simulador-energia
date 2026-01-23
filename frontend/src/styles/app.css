@@ -274,7 +274,7 @@
 
 .supplier-item summary {
   display: grid;
-  grid-template-columns: auto auto 1fr auto;
+  grid-template-columns: auto auto 1fr auto auto;
   align-items: center;
   gap: 12px;
   padding: 14px 16px;
@@ -306,6 +306,20 @@
 .supplier-name {
   font-weight: 600;
   color: #0b3d2e;
+}
+
+.supplier-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #0f5a3a;
+}
+
+.supplier-rating .icon {
+  width: 16px;
+  height: 16px;
+  color: #facc15;
 }
 
 .supplier-economy {
