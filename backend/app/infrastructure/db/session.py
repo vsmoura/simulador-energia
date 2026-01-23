@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine import make_url
 from sqlalchemy.orm import sessionmaker
 
-from app.core.config import get_settings
+from app.infrastructure.core.config import get_settings
 
 settings = get_settings()
 

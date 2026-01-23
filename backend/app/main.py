@@ -4,8 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from strawberry.fastapi import GraphQLRouter
 
-from app.core.config import get_settings
-from app.core.logging import configure_logging
+from app.infrastructure.core.config import get_settings
+from app.infrastructure.core.logging import configure_logging
 from app.infrastructure.db.seed import seed_database
 from app.infrastructure.db.session import get_db
 from app.adapters.graphql.context import GraphQLContext
