@@ -2,12 +2,11 @@ import { render, screen } from "@testing-library/react";
 
 import App from "../app/App";
 
-jest.mock("../graphql/client", () => ({
-  apolloClient: {
-    query: jest.fn(),
-    mutate: jest.fn(),
-    watchQuery: jest.fn(),
-  },
+jest.mock("../infrastructure/graphql/quoteGateway", () => ({
+  createQuoteGateway: () => ({
+    getStates: jest.fn(),
+    getQuote: jest.fn(),
+  }),
 }));
 
 jest.mock("../features/quote/QuotePage", () => ({

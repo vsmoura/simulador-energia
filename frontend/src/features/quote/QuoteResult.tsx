@@ -1,4 +1,4 @@
-import { QuoteResult as QuoteResultType, SolutionQuote } from "./types";
+import { QuoteResult as QuoteResultType, SolutionQuote } from "../../domain/quote/types";
 
 interface QuoteResultProps {
   data: QuoteResultType;

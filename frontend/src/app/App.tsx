@@ -1,15 +1,11 @@
-import { ApolloProvider } from "@apollo/client";
-
 import { QuotePage } from "../features/quote/QuotePage";
-import { apolloClient } from "../graphql/client";
+import { createQuoteGateway } from "../infrastructure/graphql/quoteGateway";
 import "../styles/app.css";
 
+const quoteGateway = createQuoteGateway();
+
 const App = () => {
-  return (
-    <ApolloProvider client={apolloClient}>
-      <QuotePage />
-    </ApolloProvider>
-  );
+  return <QuotePage quoteGateway={quoteGateway} />;
 };
 
 export default App;

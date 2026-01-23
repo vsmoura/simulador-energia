@@ -1,18 +1,10 @@
-import { useQuery } from "@apollo/client";
 import { useEffect, useRef, useState } from "react";
 
+import { calculateQuote, listStates } from "../../application/quote/service";
+import { QuoteGateway } from "../../application/quote/ports";
+import { QuoteResult as QuoteResultType, StateOption } from "../../domain/quote/types";
 import { QuoteForm } from "./QuoteForm";
 import { QuoteResult } from "./QuoteResult";
-import { QuoteResult as QuoteResultType, StateOption } from "./types";
-import { QUOTE_QUERY, STATES_QUERY } from "../../graphql/queries";
-
-interface QuoteResponse {
-  quote: QuoteResultType;
-}
-
-interface StatesResponse {
-  states: StateOption[];
-}
 
 const CalculatorIcon = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true" className="icon icon-accent">
@@ -27,27 +19,58 @@ const CalculatorIcon = () => (
   </svg>
 );
 
-export const QuotePage = () => {
-  const { data: statesData, loading: statesLoading, error: statesError } = useQuery<StatesResponse>(
-    STATES_QUERY,
-  );
+interface QuotePageProps {
+  quoteGateway: QuoteGateway;
+}
+
+export const QuotePage = ({ quoteGateway }: QuotePageProps) => {
+  const [states, setStates] = useState<StateOption[]>([]);
+  const [statesLoading, setStatesLoading] = useState(true);
+  const [statesError, setStatesError] = useState<string | null>(null);
   const [quoteData, setQuoteData] = useState<QuoteResultType | null>(null);
-  const {
-    refetch: fetchQuote,
-    loading: quoteLoading,
-    error: quoteError,
-  } = useQuery<QuoteResponse>(QUOTE_QUERY, {
-    skip: true,
-  });
+  const [quoteLoading, setQuoteLoading] = useState(false);
+  const [quoteError, setQuoteError] = useState<string | null>(null);
   const resultRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    let active = true;
+    setStatesLoading(true);
+    setStatesError(null);
+    listStates(quoteGateway)
+      .then((response) => {
+        if (active) {
+          setStates(response);
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setStatesError("Erro ao carregar estados.");
+        }
+      })
+      .finally(() => {
+        if (active) {
+          setStatesLoading(false);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [quoteGateway]);
+
   const handleSubmit = async (values: { stateCode: string; consumptionKwh: number }) => {
-    const response = await fetchQuote({
-      stateCode: values.stateCode,
-      consumptionKwh: values.consumptionKwh,
-    });
-    if (response.data?.quote) {
-      setQuoteData(response.data.quote);
+    setQuoteLoading(true);
+    setQuoteError(null);
+    try {
+      const response = await calculateQuote(
+        quoteGateway,
+        values.stateCode,
+        values.consumptionKwh,
+      );
+      setQuoteData(response);
+    } catch {
+      setQuoteError("Erro ao calcular economia.");
+    } finally {
+      setQuoteLoading(false);
     }
   };
   useEffect(() => {
@@ -98,13 +121,13 @@ export const QuotePage = () => {
           <p>
             Calcule quanto você pode economizar na conta de luz.
           </p>
-          {statesError && <p className="error">Erro ao carregar estados.</p>}
+          {statesError && <p className="error">{statesError}</p>}
           <QuoteForm
-            states={statesData?.states ?? []}
+            states={states}
             onSubmit={handleSubmit}
             loading={statesLoading || quoteLoading}
           />
-          {quoteError && <p className="error">Erro ao calcular economia.</p>}
+          {quoteError && <p className="error">{quoteError}</p>}
         </section>
       </section>
 

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { StateOption } from "./types";
+import { StateOption } from "../../domain/quote/types";
 
 const schema = z.object({
   stateCode: z.string().min(2, "Selecione um estado"),
