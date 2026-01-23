@@ -3,34 +3,32 @@ from __future__ import annotations
 from typing import Iterable
 
 from app.application.repositories import QuoteRepository
+from app.domain.entities import State
+from app.domain.entities import SupplierAvailability
 from app.domain.quotes import InvalidConsumptionError
 from app.domain.quotes import SolutionQuote
 from app.domain.quotes import SolutionType
 from app.domain.quotes import StateNotFoundError
 from app.domain.quotes import StateQuote
 from app.domain.quotes import SupplierQuote
-from app.infrastructure.db.models import SupplierAvailability
 
 
 def _build_supplier_quotes(
-    repo: QuoteRepository,
     availabilities: Iterable[SupplierAvailability],
     consumption_kwh: float,
 ) -> dict[SolutionType, list[SupplierQuote]]:
     quotes: dict[SolutionType, list[SupplierQuote]] = {}
     for availability in availabilities:
-        cost_per_kwh = repo.get_solution_cost(availability)
-        if cost_per_kwh is None:
-            continue
+        cost_per_kwh = availability.cost_per_kwh
         supplier = availability.supplier
-        solution_type = repo.get_solution_type(availability)
+        solution_type = availability.solution_type
         cost_total = consumption_kwh * cost_per_kwh
         quotes.setdefault(solution_type, []).append(
             SupplierQuote(
                 supplier_id=supplier.id,
                 supplier_name=supplier.name,
                 supplier_logo_url=supplier.logo_url,
-                supplier_origin_state=supplier.origin_state.code,
+                supplier_origin_state=supplier.origin_state_code,
                 total_customers=supplier.total_customers,
                 average_rating=supplier.average_rating,
                 solution_type=solution_type,
@@ -76,17 +74,20 @@ class QuoteService:
     def __init__(self, repo: QuoteRepository) -> None:
         self.repo = repo
 
+    def list_states(self) -> list[State]:
+        return self.repo.list_states()
+
     def build_state_quote(self, state_code: str, consumption_kwh: float) -> StateQuote:
         if consumption_kwh <= 0:
             raise InvalidConsumptionError("Consumption must be greater than zero.")
 
-        state = self.repo.get_state_with_suppliers(state_code)
+        state = self.repo.get_state(state_code)
         if state is None:
             raise StateNotFoundError(f"State {state_code} not found.")
 
         base_cost = consumption_kwh * state.base_tariff_per_kwh
-        availabilities = self.repo.get_supplier_availabilities(state)
-        supplier_quotes = _build_supplier_quotes(self.repo, availabilities, consumption_kwh)
+        availabilities = self.repo.get_supplier_availabilities(state_code)
+        supplier_quotes = _build_supplier_quotes(availabilities, consumption_kwh)
         supplier_quotes = _apply_economy(supplier_quotes, base_cost)
 
         solution_quotes: list[SolutionQuote] = []

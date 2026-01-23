@@ -10,7 +10,6 @@ from app.adapters.graphql.types import SolutionQuoteType
 from app.adapters.graphql.types import StateQuoteType
 from app.adapters.graphql.types import StateType
 from app.adapters.graphql.types import SupplierQuoteType
-from app.infrastructure.db.models import State
 from app.infrastructure.repositories.sqlalchemy_quote_repository import SqlAlchemyQuoteRepository
 
 
@@ -23,7 +22,8 @@ class Query:
     @strawberry.field
     def states(self, info: Info[GraphQLContext, None]) -> list[StateType]:
         session = info.context.db
-        states = session.query(State).order_by(State.code).all()
+        service = QuoteService(SqlAlchemyQuoteRepository(session))
+        states = service.list_states()
         return [
             StateType(code=state.code, name=state.name, base_tariff_per_kwh=state.base_tariff_per_kwh)
             for state in states
