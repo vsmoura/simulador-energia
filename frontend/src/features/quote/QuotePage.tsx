@@ -81,14 +81,6 @@ export const QuotePage = () => {
             <a className="ghost" href="https://clarke.com.br/" target="_blank" rel="noreferrer">
               Saiba mais
             </a>
-            <a
-              className="primary"
-              href="https://clarke.com.br/simulador-do-mercado-livre-de-energia/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Simular economia
-            </a>
           </div>
         </div>
 

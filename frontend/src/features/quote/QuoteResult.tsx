@@ -74,10 +74,6 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
   <div className="solution-card">
     <div className="solution-header">
       <h3>{formatSolutionLabel(solution.solutionType)}</h3>
-      <div>
-        <strong>{formatCurrency(solution.bestEconomy)}</strong>
-        <span> ({formatPercent(solution.bestEconomyPercent)})</span>
-      </div>
     </div>
     <ol className="supplier-list">
       {solution.suppliers.map((supplier, index) => (

@@ -48,7 +48,7 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { stateCode: "", consumptionKwh: 30000 },
+    defaultValues: { stateCode: "" },
   });
 
   const stateOptions = useMemo(
@@ -84,6 +84,7 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
           type="number"
           step="1"
           min="1"
+          placeholder="15000"
           {...register("consumptionKwh", { valueAsNumber: true })}
           disabled={loading}
         />
