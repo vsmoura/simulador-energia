@@ -404,4 +404,44 @@
   .solutions {
     grid-template-columns: 1fr;
   }
+
+  .supplier-item summary {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "rank name economy"
+      "logo logo rating";
+    row-gap: 8px;
+  }
+
+  .supplier-item summary .rank {
+    grid-area: rank;
+  }
+
+  .supplier-item summary img {
+    grid-area: logo;
+    justify-self: start;
+  }
+
+  .supplier-item summary .supplier-name {
+    grid-area: name;
+  }
+
+  .supplier-item summary .supplier-rating {
+    grid-area: rating;
+    justify-self: start;
+  }
+
+  .supplier-item summary .supplier-economy {
+    grid-area: economy;
+    justify-self: end;
+  }
+
+  .supplier-item summary img {
+    width: 88px;
+    height: 44px;
+  }
+
+  .supplier-details .supplier-metrics {
+    gap: 10px;
+  }
 }
