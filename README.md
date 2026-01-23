@@ -35,7 +35,7 @@ SPA de escolha de fornecedor. O usuario seleciona o estado (UF), informa o consu
 
 ## Links de documentacao
 - Backend: [`backend/README.md`](https://github.com/vsmoura/clark-energia/blob/main/backend/README.md)
-- Frontend: `frontend/README.md`
+- Frontend: [`frontend/README.md`](https://github.com/vsmoura/clark-energia/blob/main/frontend/README.md)
 
 ## Como rodar localmente
 ```bash
