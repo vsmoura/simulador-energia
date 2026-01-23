@@ -322,11 +322,11 @@
 }
 
 .supplier-item summary img {
-  width: 64px;
-  height: 32px;
-  object-fit: cover;
-  border-radius: 8px;
-  background: #eaf4ee;
+  width: 120px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: transparent;
 }
 
 .rank {
