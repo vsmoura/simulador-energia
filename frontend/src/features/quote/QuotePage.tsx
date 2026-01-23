@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { QuoteForm } from "./QuoteForm";
 import { QuoteResult } from "./QuoteResult";
@@ -39,6 +39,7 @@ export const QuotePage = () => {
   } = useQuery<QuoteResponse>(QUOTE_QUERY, {
     skip: true,
   });
+  const resultRef = useRef<HTMLDivElement | null>(null);
 
   const handleSubmit = async (values: { stateCode: string; consumptionKwh: number }) => {
     const response = await fetchQuote({
@@ -49,6 +50,11 @@ export const QuotePage = () => {
       setQuoteData(response.data.quote);
     }
   };
+  useEffect(() => {
+    if (quoteData && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [quoteData]);
 
   return (
     <div className="page">
@@ -102,7 +108,11 @@ export const QuotePage = () => {
         </section>
       </section>
 
-      {quoteData && <QuoteResult data={quoteData} />}
+      {quoteData && (
+        <div ref={resultRef}>
+          <QuoteResult data={quoteData} />
+        </div>
+      )}
     </div>
   );
 };
