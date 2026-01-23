@@ -17,6 +17,36 @@ const formatRank = (index: number) => `${index + 1}º`;
 const formatSolutionLabel = (value: string) =>
   value === "MERCADO_LIVRE" ? "Mercado Livre" : "Geração Distribuída";
 
+const stateArticles: Record<string, "o" | "a"> = {
+  Acre: "o",
+  Alagoas: "o",
+  Amapá: "o",
+  Amazonas: "o",
+  Bahia: "a",
+  Ceará: "o",
+  "Distrito Federal": "o",
+  "Espírito Santo": "o",
+  Goiás: "o",
+  Maranhão: "o",
+  "Mato Grosso": "o",
+  "Mato Grosso do Sul": "o",
+  "Minas Gerais": "o",
+  Pará: "o",
+  Paraíba: "a",
+  Paraná: "o",
+  Pernambuco: "o",
+  Piauí: "o",
+  "Rio de Janeiro": "o",
+  "Rio Grande do Norte": "o",
+  "Rio Grande do Sul": "o",
+  Rondônia: "a",
+  Roraima: "a",
+  "Santa Catarina": "a",
+  "São Paulo": "o",
+  Sergipe: "o",
+  Tocantins: "o",
+};
+
 const CurrencyIcon = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">
     <path
@@ -118,17 +148,29 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
   </div>
 );
 
+const UnavailableSolutionCard = ({ title }: { title: string }) => (
+  <div className="solution-card unavailable">
+    <div className="solution-header">
+      <h3>{title}</h3>
+    </div>
+    <p className="solution-unavailable">Indisponível para a localidade selecionada.</p>
+  </div>
+);
+
 const solutionByType = (solutions: SolutionQuote[], type: string) =>
   solutions.find((solution) => solution.solutionType === type);
 
 export const QuoteResult = ({ data }: QuoteResultProps) => {
   const mercadoLivre = solutionByType(data.solutions, "MERCADO_LIVRE");
   const geracaoDistribuida = solutionByType(data.solutions, "GD");
+  const stateArticle = stateArticles[data.stateName] ?? "o";
 
   return (
     <section className="quote-result">
       <header>
-        <h2>Análise Energética para {data.stateName}</h2>
+        <h2>
+          Análise Energética para {stateArticle} {data.stateName}
+        </h2>
         <p>
           Atualmente, com o consumo de <strong>{data.consumptionKwh} kWh</strong> na tarifa
           convencional da distribuidora estadual, seu custo mensal é de{" "}
@@ -137,8 +179,16 @@ export const QuoteResult = ({ data }: QuoteResultProps) => {
       </header>
 
       <div className="solutions">
-        {mercadoLivre && <SolutionCard solution={mercadoLivre} />}
-        {geracaoDistribuida && <SolutionCard solution={geracaoDistribuida} />}
+        {mercadoLivre ? (
+          <SolutionCard solution={mercadoLivre} />
+        ) : (
+          <UnavailableSolutionCard title="Mercado Livre" />
+        )}
+        {geracaoDistribuida ? (
+          <SolutionCard solution={geracaoDistribuida} />
+        ) : (
+          <UnavailableSolutionCard title="Geração Distribuída" />
+        )}
       </div>
     </section>
   );
