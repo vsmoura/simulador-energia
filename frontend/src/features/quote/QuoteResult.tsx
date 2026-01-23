@@ -118,7 +118,7 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
                 {supplier.averageRating.toFixed(1)}
               </span>
               <span className="supplier-economy">
-                {formatPercent(supplier.economyPercent)}
+                -{formatPercent(supplier.economyPercent)}
               </span>
             </summary>
             <div className="supplier-details">

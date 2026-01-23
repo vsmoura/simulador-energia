@@ -110,7 +110,10 @@ export const QuotePage = () => {
 
       {quoteData && (
         <div ref={resultRef}>
-          <QuoteResult data={quoteData} />
+          <QuoteResult
+            key={`${quoteData.stateCode}-${quoteData.consumptionKwh}-${quoteData.baseCost}`}
+            data={quoteData}
+          />
         </div>
       )}
     </div>
