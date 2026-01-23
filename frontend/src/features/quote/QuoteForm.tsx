@@ -84,7 +84,7 @@ export const QuoteForm = ({ states, onSubmit, loading }: QuoteFormProps) => {
           type="number"
           step="1"
           min="1"
-          placeholder="15000"
+          placeholder="Ex: 30000"
           {...register("consumptionKwh", { valueAsNumber: true })}
           disabled={loading}
         />
