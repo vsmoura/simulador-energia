@@ -215,3 +215,6 @@ pnpm-debug.log*
 frontend/dist/
 frontend/.vite/
 coverage/
+
+# Generated logo assets (base64 already embedded in seed.py)
+backend/app/infrastructure/db/assets/logos/*-120x60.png

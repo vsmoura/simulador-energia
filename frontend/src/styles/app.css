@@ -322,11 +322,13 @@
 }
 
 .supplier-item summary img {
-  width: 120px;
-  height: 60px;
+  width: 96px;
+  height: 48px;
   object-fit: contain;
   border-radius: 12px;
   background: transparent;
+  filter: grayscale(100%);
+  opacity: 0.9;
 }
 
 .rank {

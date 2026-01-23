@@ -1,4 +1,5 @@
 import { QuoteResult as QuoteResultType, SolutionQuote } from "../../domain/quote/types";
+import placeholderLogo from "../../assets/placeholder-logo.svg";
 
 interface QuoteResultProps {
   data: QuoteResultType;
@@ -111,7 +112,17 @@ const SolutionCard = ({ solution }: { solution: SolutionQuote }) => (
           <details open={index === 0}>
             <summary>
               <span className="rank">{formatRank(index)}</span>
-              <img src={supplier.supplierLogoUrl} alt={supplier.supplierName} />
+              <img
+                src={supplier.supplierLogoUrl || placeholderLogo}
+                alt={supplier.supplierName}
+                loading="lazy"
+                onError={(event) => {
+                  const target = event.currentTarget as HTMLImageElement;
+                  if (target.src !== placeholderLogo) {
+                    target.src = placeholderLogo;
+                  }
+                }}
+              />
               <span className="supplier-name">{supplier.supplierName}</span>
               <span className="supplier-rating">
                 <StarIcon />
