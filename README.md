@@ -34,7 +34,7 @@ SPA de escolha de fornecedor. O usuario seleciona o estado (UF), informa o consu
 - Resultado apresenta economia por solucao e ranking por fornecedor.
 
 ## Links de documentacao
-- Backend: `backend/README.md`
+- Backend: [`backend/README.md`](https://github.com/vsmoura/clark-energia/blob/main/backend/README.md)
 - Frontend: `frontend/README.md`
 
 ## Como rodar localmente
