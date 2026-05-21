@@ -1,4 +1,4 @@
-# Frontend - Clarke Energia
+# Frontend
 
 Interface web para simular economia no Mercado Livre de Energia, consumindo a API GraphQL do backend.
 
