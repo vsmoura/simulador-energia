@@ -1,4 +1,4 @@
-Desafio Tecnico
+## Desafio Tecnico
 
 SPA de escolha de fornecedor. O usuario seleciona o estado (UF), informa o consumo mensal (kWh) e visualiza as solucoes disponiveis (GD e/ou Mercado Livre), fornecedores e economia estimada.
 
