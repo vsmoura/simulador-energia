@@ -1,4 +1,4 @@
-# Clarke Energia - Desafio Tecnico
+Desafio Tecnico
 
 SPA de escolha de fornecedor. O usuario seleciona o estado (UF), informa o consumo mensal (kWh) e visualiza as solucoes disponiveis (GD e/ou Mercado Livre), fornecedores e economia estimada.
 
@@ -32,10 +32,6 @@ SPA de escolha de fornecedor. O usuario seleciona o estado (UF), informa o consu
 - `custo_fornecedor = consumo_kwh * custo_kwh_fornecedor(solucao)`.
 - `economia = custo_base - custo_fornecedor`.
 - Resultado apresenta economia por solucao e ranking por fornecedor.
-
-## Links de documentacao
-- Backend: [`backend/README.md`](https://github.com/vsmoura/clark-energia/blob/main/backend/README.md)
-- Frontend: [`frontend/README.md`](https://github.com/vsmoura/clark-energia/blob/main/frontend/README.md)
 
 ## Como rodar localmente
 ```bash
