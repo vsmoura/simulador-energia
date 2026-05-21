@@ -1,4 +1,4 @@
-# Backend - Clarke Energia
+# Backend
 
 Esta API entrega cotacao de energia via GraphQL e segue Clean Architecture com separacao clara de camadas.
 
